@@ -45,7 +45,6 @@ The code has been tested using R (4.1.2)/ RStudio (2022.07.1), Matlab (version R
 ## GlobalConnectedness folder
 - contains matlab code for (1) extracting and filtering functional imaging data, (2) conducting global connectedness calculation
 - 'masks' folder contains gray matter, white matter, and CSF masks used in the analysis
-- 'tc_filtered_3mm.mat' is an example that can be used to conduct global connectedness calculation 
 
 
 
