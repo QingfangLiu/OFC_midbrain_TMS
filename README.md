@@ -1,6 +1,3 @@
-# OFC_midbrain_TMS
-
-
 # This repository contains data and code for the manuscript "Midbrain signaling of identity prediction errors depends on orbitofrontal cortex networks"
 
 The code has been tested using R (4.1.2)/RStudio (2022.07.1), Matlab (version R2020b, Mathworks Inc).
