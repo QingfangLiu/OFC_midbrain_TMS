@@ -1,0 +1,45 @@
+model{
+for(j in 1:nsubs){
+ for(c in 1:nconds){
+  for(r in 1:nruns){
+
+    for(i in 1:ntrials){
+
+      for(m in 1:3){
+        # convert current odor to a vector "real"
+        real[j,c,r,i,m] <- ifelse(Odor[j,c,r,i]==m,1,0)
+
+        # softmax function converting w to prob
+        # note "exp" doesn't take vector inputs
+        prob[j,c,r,i,m] <- exp(w[Cue[j,c,r,i],m,j,c,r,i]*theta)/sum(exp(w[Cue[j,c,r,i],1,j,c,r,i]*theta),exp(w[Cue[j,c,r,i],2,j,c,r,i]*theta),exp(w[Cue[j,c,r,i],3,j,c,r,i]*theta)) 
+      }
+
+      # update w vector of current cue or pass w vector of absent cue to next trial
+      for(k in 1:2){
+        w[k,1:3,j,c,r,i+1] <- w[k,1:3,j,c,r,i] + ifelse(Cue[j,c,r,i]==k,alpha[j] * (real[j,c,r,i,1:3] - w[k,1:3,j,c,r,i]),0)
+      }   
+    } # end of trials loop
+} # end of runs loop
+} # end of conds loop
+} # end of subs loop
+
+# observed response data
+for(j in 1:nsubs){
+ for(c in 1:nconds){
+  for(r in 1:nruns){
+	for(i in 1:ntrials){
+       # Resp at this trial (categorical distribution)
+       Resp[j,c,r,i] ~ dcat(prob[j,c,r,i,])
+}}}}
+
+
+  # Priors
+  theta ~ dgamma(5,1)
+  kappa ~ dgamma(1,0.1)
+  mu ~ dbeta(8,2)I(0.001,0.999)
+  
+  for (j in 1:nsubs){
+	    alpha[j] ~ dbeta(mu * kappa,(1 - mu) * kappa)T(0.001,0.999)
+   }
+
+}
