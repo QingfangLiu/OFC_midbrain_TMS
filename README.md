@@ -2,8 +2,10 @@
 
 The code has been tested using R (4.1.2)/RStudio (2022.07.1), Matlab (version R2020b, Mathworks Inc).
 
-## SourceData and SourceCode
+## SourceData 
+Source data are published with the manuscript. To run the code with the source data, put source data in the same directory with the source code folder.
 
+## SourceCode
 - All figure panels (in 'Figs' folder) can be replicated by runing the SourceCode using SourceData
 - All source codes are written in R, but require some packages to run the code
 - The 'Setup.R' code listed all R packages. If any package cannot be loaded, then it needs to be installed by running install.package(package_name)
